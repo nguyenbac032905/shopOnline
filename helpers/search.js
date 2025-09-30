@@ -1,0 +1,13 @@
+module.exports = (req) => {
+    let objectSearch = {
+        keyword: "",
+        regex: ""
+    };
+
+    if(req.query.keyword){
+        objectSearch.keyword = req.query.keyword;
+        const regex = new RegExp(objectSearch.keyword,"i");
+        objectSearch.regex = regex;
+    };
+    return objectSearch;
+}
