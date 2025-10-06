@@ -109,3 +109,32 @@ if(formChangeMulti){
     }
   })
 }
+//alert
+const showAlert = document.querySelector("[show-alert]");
+const closeAlert = document.querySelector("[close-alert]");
+if(closeAlert){
+  closeAlert.addEventListener("click",() =>{
+    showAlert.classList.add("alert-hidden");
+  })
+}
+if(showAlert){
+  const time = parseInt(showAlert.getAttribute("data-time"));
+  setTimeout(() => {
+    showAlert.classList.add("alert-hidden");
+  }, time);
+}
+//upload ảnh
+const uploadImage = document.querySelector("[upload-image]");
+if(uploadImage){
+  const uploadImageInput = document.querySelector("[upload-image-input]");
+  const uploadImagePreview = document.querySelector("[upload-image-preview]");
+  const buttonDelete = document.querySelector("[delete-image-upload]");
+  uploadImageInput.addEventListener("change",(e) =>{
+    const file = e.target.files[0];
+    uploadImagePreview.src = URL.createObjectURL(file);
+  });
+  buttonDelete.addEventListener("click",() => {
+    uploadImageInput.value = "";
+    uploadImagePreview.src = ""
+  })
+}

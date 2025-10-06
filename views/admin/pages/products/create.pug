@@ -1,0 +1,105 @@
+extends ../../layouts/default.pug
+include ../../mixins/alert.pug
+
+block main
+    +alertError(3000)
+    h1(class="mb-4") Thêm mới sản phẩm
+    form(
+        action=`${prefixAdmin}/products/create`
+        id="form-create-product"
+        method="POST"
+        enctype="multipart/form-data"
+    )
+        div.form-group
+            label(for="title") Tiêu đề
+            input.form-control(
+            type="text"
+            id="title"
+            name="title"
+            required
+            )
+
+        div.form-group
+            label(for="desc") Mô tả
+            textarea.form-control(
+            id="desc"
+            name="description"
+            rows="5"
+            )
+
+        div.form-group
+            label(for="price") Giá
+            input.form-control(
+            type="number"
+            id="price"
+            name="price"
+            value="0"
+            min="0"
+            )
+
+        div.form-group
+            label(for="discount") % Giảm giá
+            input.form-control(
+            type="number"
+            id="discount"
+            name="discountPercentage"
+            value="0"
+            min="0"
+            )
+
+        div.form-group
+            label(for="stock") Số lượng
+            input.form-control(
+            type="number"
+            id="stock"
+            name="stock"
+            value="0"
+            min="0"
+            )
+
+        div(class="form-group" upload-image)
+            label(for="thumbnail") Ảnh
+            input.form-control(
+            type="file"
+            id="thumbnail"
+            name="thumbnail"
+            class="form-control-file"
+            accept="image/*"
+            upload-image-input
+            )
+            img(src="" upload-image-preview class="image-preview")
+            span(delete-image-upload) x
+
+        div.form-group
+            label(for="position") Vị trí
+            input.form-control(
+            type="number"
+            id="position"
+            name="position"
+            placeholder="Tự động tăng"
+            min="1"
+            )
+
+        div.form-group.form-check.form-check-inline
+            input.form-check-input(
+            type="radio"
+            id="statusActive"
+            name="status"
+            value="active"
+            checked
+            )
+            label.form-check-label(for="statusActive") Hoạt động
+
+        div.form-group.form-check.form-check-inline
+            input.form-check-input(
+            type="radio"
+            id="statusInactive"
+            name="status"
+            value="inactive"
+            )
+            label.form-check-label(for="statusInactive") Không hoạt động
+
+        div.form-group
+            button.btn.btn-primary(type="submit") Tạo mới
+
+    script(src="/admin/js/product.js")

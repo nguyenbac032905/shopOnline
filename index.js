@@ -10,7 +10,7 @@ const routeAdmin = require("./routes/admin/index.route");
 const database = require("./config/database");
 database.connect();
 
-app.set('views', './views');
+app.set('views', `${__dirname}/views`);
 app.set('view engine', 'pug');
 //tạo biến toàn cục
 const systemConfig =require("./config/system");
@@ -22,7 +22,15 @@ app.use(methodOverride('_method'));
 const bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded());
 //public file
-app.use(express.static("public"));
+app.use(express.static(`${__dirname}/public`));
+//khai báo express-flash
+const flash = require('express-flash');
+const cookieParser = require("cookie-parser");
+const session = require("express-session");
+//sử dụng flash
+app.use(cookieParser('diencookieoday'));
+app.use(session({ cookie: { maxAge: 60000 }}));
+app.use(flash());
 
 //gọi routes
 routeClient(app);
